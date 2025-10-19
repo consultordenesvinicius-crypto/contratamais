@@ -1,0 +1,13 @@
+{
+  "name": "contratamais",
+  "version": "1.0.0",
+  "description": "Plataforma de atendimento inteligente ContrataMais com integrações OpenAI e WhatsApp Cloud.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
