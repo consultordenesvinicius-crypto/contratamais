@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../api/node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+model Contact {
+  id          String    @id @default(cuid())
+  name        String?
+  phoneNumber String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  messages    Message[]
+}
+
+model Message {
+  id         String           @id @default(cuid())
+  contact    Contact          @relation(fields: [contactId], references: [id])
+  contactId  String
+  direction  MessageDirection
+  content    String
+  status     MessageStatus
+  aiModel    String?
+  createdAt  DateTime         @default(now())
+}
